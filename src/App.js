@@ -1,15 +1,13 @@
-
 import './App.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
-
-
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNoteText, setNewNoteText] = useState('');
   const [searchText, setSearchText] = useState('');
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
   function addNote() {
     if (newNoteText.trim() !== '') {
@@ -20,12 +18,14 @@ function App() {
       };
       setNotes([...notes, newNote]);
       setNewNoteText('');
+      setFilteredNotes([...notes, newNote]);
     }
   }
 
   function deleteNote(id) {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
+    setFilteredNotes(updatedNotes);
   }
 
   function handleNewNoteTextChange(event) {
@@ -33,24 +33,28 @@ function App() {
   }
 
   function handleSearchTextChange(event) {
-    setSearchText(event.target.value);
+    const searchText = event.target.value;
+    setSearchText(searchText);
+    const filteredNotes = notes.filter((note) =>
+      note.text.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredNotes(filteredNotes);
   }
-
-  const filteredNotes = notes.filter((note) => note.text.toLowerCase().includes(searchText.toLowerCase()));
-
-  
   function handleSearch() {
     const searchInput = document.getElementById('search-input');
     setSearchText(searchInput.value);
   }
 
-
   return (
     <div>
       <h2>Notes</h2>
-      <div style={{ display: 'flex',
-        width:'400px',
-        alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          width: '400px',
+          alignItems: 'center',
+        }}
+      >
         <input
           type="text"
           id="search-input"
@@ -69,19 +73,22 @@ function App() {
       />
       <button onClick={addNote}>Save</button>
       <div>
-        {notes.map((note) => (
-          <div key={note.id} style={{ 
-               backgroundColor: 'rgb(216, 224, 128)',
-               border: 'transparent',   
-               padding: '10px', 
-               margin: '10px 0',
-               borderRadius:'6px', 
-               display:'block',
-               }}>
+        {filteredNotes.map((note) => (
+          <div
+            key={note.id}
+            style={{
+              backgroundColor: 'rgb(216, 224, 128)',
+              border: 'transparent',
+              padding: '10px',
+              margin: '10px 0',
+              borderRadius: '6px',
+              display: 'block',
+            }}
+          >
             <p>{note.timestamp}</p>
             <p>{note.text}</p>
-            <button className='delete' onClick={() => deleteNote(note.id)} >
-            <FontAwesomeIcon icon={faTrash} />
+            <button className="delete" onClick={() => deleteNote(note.id)}>
+              <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
         ))}
