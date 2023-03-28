@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ShaikHussamali/my-app/static/css/main.63b57463.css",
+    "main.js": "/ShaikHussamali/my-app/static/js/main.c03be79e.js",
+    "static/js/787.28cb0dcd.chunk.js": "/ShaikHussamali/my-app/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/ShaikHussamali/my-app/index.html",
+    "main.63b57463.css.map": "/ShaikHussamali/my-app/static/css/main.63b57463.css.map",
+    "main.c03be79e.js.map": "/ShaikHussamali/my-app/static/js/main.c03be79e.js.map",
+    "787.28cb0dcd.chunk.js.map": "/ShaikHussamali/my-app/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63b57463.css",
+    "static/js/main.c03be79e.js"
+  ]
+}
